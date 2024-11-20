@@ -1,0 +1,23 @@
+kind: pipeline
+type: docker
+name: nodejs-vite-pipeline
+
+steps:
+  # 1. Instalasi dependencies
+  - name: install-dependencies
+    image: node:20-alpine
+    commands:
+      - npm install
+
+  # 2. Build aplikasi menggunakan Vite
+  - name: build-app
+    image: node:20-alpine
+    commands:
+      - npm run build
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
+    - pull_request
